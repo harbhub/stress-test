@@ -13,27 +13,21 @@ var bhttp = require("bhttp");
 9)  How much CPU time and memory does a normal request use?
 */
 
-var url = 'https://www.example.com';
-var numberOfRequests = 10;
-var numberOfSuccesses = 0;
-var numberOfErrors = 0;
+var url = 'https://www.example.com/';
+var numberOfRequests = 100;
 
 var startTime = Date.now();
+var runningRequests = [];
 
 for (var i = 0; i < numberOfRequests; ++i) {
-    Promise.try(function() {
+	runningRequests.push(Promise.try(function() {
         return bhttp.get(url);
-    }).then(function(response) {
-        if (response.statusCode === 200) {
-            numberOfSuccesses += 1;
-        } else {
-            numberOfErrors += 1;
-        };
-        if (numberOfSuccesses + numberOfErrors === numberOfRequests) {
-            done();
-        }
-    });
+    }));
 };
+
+Promise.all(runningRequests).then(function () {
+	done();
+});
 
 function done() {
     console.log('Done Performing Stress Test');
@@ -41,8 +35,6 @@ function done() {
     var diffTime = endTime - startTime;
     var results = {
         numberOfRequests: numberOfRequests,
-        numberOfSuccesses: numberOfSuccesses,
-        numberOfErrors: numberOfErrors,
         startTime: startTime,
         endTime: endTime,
         diffTime: diffTime + 'ms'
