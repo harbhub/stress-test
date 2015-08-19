@@ -1,6 +1,8 @@
 # stress-test
 Stress testing using NodeJS
+
 1)  Is the website fast enough for the user?  (200ms if possible)
+
 2)  Can the website keep up with normal use?
 3)  What will need to scale first on the system?
 4)  Can the website deal with overage intelligently?
