@@ -1,0 +1,23 @@
+{
+  "name": "stress-test",
+  "version": "v0.0.1",
+  "description": "",
+  "author": "Michael Harbach",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node stress-test.js"
+  },
+  "repository": {},
+  "keywords": [
+    "stress-test",
+    "stress",
+    "test"
+  ],
+  "dependencies": {
+    "bhttp": "^1.2.1",
+    "bluebird": "^2.9.34"
+  }
+}
